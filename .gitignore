@@ -11,3 +11,6 @@ bin/scripts/__pycache__/*
 documentation/docs/.obsidian/
 JOSS/.obsidian
 bin/scripts/plotsr/plotsr/scripts/__pycache__
+curation/
+references/
+validation/

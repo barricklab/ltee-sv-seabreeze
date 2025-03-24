@@ -481,3 +481,25 @@ rule generate_genome_diffs_tables:
         gdtools ANNOTATE -o {wildcards.sample}.html -r ../../../{input.reference} -f HTML ../../../{output.gd} >> ../../../{log} 2>&1
         cd ../../../
         """
+
+# doesn't work for PE illumina data. USe brefito instead for validation.
+rule validate_genomes:
+    conda:
+        "bin/workflow/envs/breseq.yml"
+    input:
+        assembly = "data/03_reindex_genomes/{sample}.fasta",
+        gd = "curation/03_master_gd/{sample}.gd",
+        illumina = "validation/01_illumina_reads/{sample}.fastq.gz",
+        reference = "references/REL606.gff3"
+    output:
+        validation = "validation/03_breseq_output/{sample}/output/index.html"
+    params:
+        output_folder = "validation/03_breseq_output/{sample}",
+        simulated_assembly = "validation/02_simulated_genome/{sample}.fasta"
+    log:
+        "validation/logs/validate_genomes/{sample}.log"
+    shell:
+        """
+        gdtools APPLY --output {params.simulated_assembly} --reference {input.reference} {input.gd} >> {log} 2>&1
+        breseq -r {params.simulated_assembly} -o {params.output_folder} {input.illumina} >> {log} 2>&1
+        """
