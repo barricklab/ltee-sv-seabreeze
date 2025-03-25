@@ -14,3 +14,5 @@ bin/scripts/plotsr/plotsr/scripts/__pycache__
 curation/
 references/
 validation/
+bin/scripts/plotsr/plotsr/__pycache__/
+bin/scripts/plotsr/plotsr/__pycache__/*.pyc
