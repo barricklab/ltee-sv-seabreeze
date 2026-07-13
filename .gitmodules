@@ -1,0 +1,3 @@
+[submodule "LTEE-Ecoli"]
+	path = LTEE-Ecoli
+	url = git@github.com:barricklab/LTEE-Ecoli.git
